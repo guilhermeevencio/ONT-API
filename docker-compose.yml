@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  backend:
+    container_name: app-backend
+    build: ./backend
+    ports:
+      - 3001:3001
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APP_PORT=3001
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=olt_monitoring
+      - POSTGRES_PORT=5432
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=root
+      - POSTGRES_DB=olt_monitoring
+    restart: 'always'
+    volumes:
+      - pgdata:/data/postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      timeout: 10s
+      retries: 5
+    cap_add:
+      - SYS_NICE
+
+volumes:
+  pgdata:
+    driver: local
