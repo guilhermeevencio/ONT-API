@@ -1,7 +1,7 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
-class OntInfo extends Model {
+class OntInfoModel extends Model {
   declare sn: number;
   declare slot: string;
   declare port: string;
@@ -10,7 +10,7 @@ class OntInfo extends Model {
   declare manufacturer: string;
 }
 
-OntInfo.init({
+OntInfoModel.init({
   sn: {
     type: INTEGER,
     allowNull: false,
@@ -27,6 +27,7 @@ OntInfo.init({
   ontId: {
     type: STRING,
     allowNull: false,
+    field: 'ont_id'
   },
   state: {
     type: STRING,
@@ -38,8 +39,9 @@ OntInfo.init({
   }
 }, {
   sequelize: db,
-  modelName: 'ont-info',
+  modelName: 'ontInfo',
   timestamps: false,
+  freezeTableName: true
 });
 
-export default OntInfo;
+export default OntInfoModel;
