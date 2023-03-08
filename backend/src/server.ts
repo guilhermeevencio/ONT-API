@@ -1,9 +1,8 @@
-import express from 'express'
+import app from './app';
+import 'dotenv/config';
 
-const app = express()
+const PORT = process.env.APP_PORT || 3001;
 
-app.use(express.json())
+app.listen(PORT)
 
-app.get('/', (req, res) => res.status(200).json({ message: 'hello world!' }));
-
-app.listen(3001)
+console.log(`Api rodando na porta ${PORT}`);
