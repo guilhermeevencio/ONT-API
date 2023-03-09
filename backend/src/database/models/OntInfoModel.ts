@@ -2,7 +2,7 @@ import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
 
 class OntInfoModel extends Model {
-  declare sn: number;
+  declare sn: string;
   declare slot: string;
   declare port: string;
   declare ontId: string;
@@ -12,7 +12,7 @@ class OntInfoModel extends Model {
 
 OntInfoModel.init({
   sn: {
-    type: INTEGER,
+    type: STRING,
     allowNull: false,
     primaryKey: true,
   },

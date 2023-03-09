@@ -1,5 +1,5 @@
 interface IOntInfo {
-  sn: number;
+  sn: string;
   slot: string;
   port: string;
   ontId: string;

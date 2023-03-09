@@ -9,7 +9,7 @@ module.exports = {
       // },
       sn: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         primaryKey: true
       },
       slot: {
