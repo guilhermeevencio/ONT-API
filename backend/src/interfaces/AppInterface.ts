@@ -9,6 +9,7 @@ interface IOntInfo {
 
 interface IAppService {
   getAllOntInfo(): Promise<IOntInfo[]>
+  populateDatabase(): Promise<IOntInfo[]>
 }
 
 export { IAppService, IOntInfo }

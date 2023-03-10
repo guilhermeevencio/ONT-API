@@ -12,7 +12,6 @@ app.use(appRoutes)
 
 app.get('/', (req, res) => {
   const teste = zteTextFileHandler()
-  console.log(teste)
 
   res.status(200).json(teste)
 })
