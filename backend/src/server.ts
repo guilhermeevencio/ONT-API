@@ -1,8 +1,8 @@
-import app from './app';
-import 'dotenv/config';
+import app from './app'
+import 'dotenv/config'
 
-const PORT = process.env.APP_PORT || 3001;
+const PORT = process.env.APP_PORT || 3001
 
 app.listen(PORT)
 
-console.log(`Api rodando na porta ${PORT}`);
+console.log(`Api rodando na porta ${PORT}`)

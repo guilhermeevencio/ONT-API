@@ -1,17 +1,14 @@
 interface IOntInfo {
-  sn: string;
-  slot: string;
-  port: string;
-  ontId: string;
-  state: string;
-  manufacturer: string;
+  sn: string
+  slot: string
+  port: string
+  ontId: string
+  state: string
+  manufacturer: string
 }
 
 interface IAppService {
-  getAllOntInfo(): Promise<IOntInfo[]> 
+  getAllOntInfo(): Promise<IOntInfo[]>
 }
 
-export {
-  IAppService,
-  IOntInfo
-}
+export { IAppService, IOntInfo }

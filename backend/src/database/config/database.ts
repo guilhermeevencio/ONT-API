@@ -1,5 +1,5 @@
-import 'dotenv/config';
-import { Options } from 'sequelize';
+import 'dotenv/config'
+import { Options } from 'sequelize'
 
 const config: Options = {
   username: process.env.DB_USER || 'root',
@@ -8,6 +8,6 @@ const config: Options = {
   host: process.env.DB_HOST || 'localhost',
   port: Number(process.env.DB_PORT) || 3002,
   dialect: 'mysql',
-};
+}
 
-export = config;
+export = config
