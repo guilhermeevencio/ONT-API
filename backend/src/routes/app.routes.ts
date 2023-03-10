@@ -11,4 +11,8 @@ appRoutes.get('/ont-info', (req, res, next) => {
   appControllerObj.getAllOntInfo(req, res, next)
 })
 
+appRoutes.post('/create-ont', (req, res, next) => {
+  appControllerObj.createOntInfo(req, res, next)
+})
+
 export default appRoutes

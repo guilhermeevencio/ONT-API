@@ -1,5 +1,7 @@
+import CustomError from '../Error/CustomError'
 import { NextFunction, Request, Response } from 'express'
 import { IAppService } from '../interfaces/AppInterface'
+import Joi from 'joi'
 
 export default class AppController {
   // eslint-disable-next-line no-useless-constructor
@@ -19,6 +21,35 @@ export default class AppController {
       } else {
         res.status(200).json(ontInfoArr)
       }
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  public async createOntInfo(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> {
+    try {
+      const { body } = req
+
+      if (!body) throw new CustomError('Some fields are missing!', 400)
+
+      const schema = Joi.object({
+        sn: Joi.string().required(),
+        slot: Joi.string().required(),
+        port: Joi.string().required(),
+        ontId: Joi.string().required(),
+        state: Joi.string().required(),
+        manufacturer: Joi.string().required(),
+      })
+
+      const { error } = schema.validate(body)
+      if (error) throw new CustomError(error.message, 400)
+
+      await this.appService.create(body)
+      res.status(201).json({ message: 'Ont info registered!' })
     } catch (error) {
       next(error)
     }

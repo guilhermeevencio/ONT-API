@@ -28,4 +28,8 @@ export default class AppService implements IAppService {
 
     return await this.getAllOntInfo()
   }
+
+  async create(ontInfo: IOntInfo) {
+    await this.ontInfoModel.create({ ...ontInfo })
+  }
 }
