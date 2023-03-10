@@ -54,4 +54,20 @@ export default class AppController {
       next(error)
     }
   }
+
+  public async findOne(req: Request, res: Response, next: NextFunction) {
+    try {
+      const schema = Joi.object({
+        sn: Joi.string().required(),
+      })
+      const { error } = schema.validate(req.body)
+      if (error) throw new CustomError(error.message, 400)
+
+      const response = await this.appService.findOne(req.body.sn)
+      if (!response) res.status(404).json({ message: 'sn not found!' })
+      res.status(200).json(response)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

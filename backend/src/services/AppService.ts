@@ -32,4 +32,13 @@ export default class AppService implements IAppService {
   async create(ontInfo: IOntInfo) {
     await this.ontInfoModel.create({ ...ontInfo })
   }
+
+  async findOne(sn: string): Promise<IOntInfo> {
+    console.log(sn)
+
+    const ontInfo = await this.ontInfoModel.findOne({ where: { sn } })
+    console.log(ontInfo)
+
+    return ontInfo
+  }
 }
