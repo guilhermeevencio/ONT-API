@@ -1,7 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import appRoutes from './routes/app.routes'
+import 'express-async-errors'
 import { zteTextFileHandler } from './utils/textFileHandler'
+import ErrorHandler from './middlewares/ErrorHandler'
 
 const app = express()
 
@@ -15,5 +17,7 @@ app.get('/', (req, res) => {
 
   res.status(200).json(teste)
 })
+
+app.use(ErrorHandler)
 
 export default app

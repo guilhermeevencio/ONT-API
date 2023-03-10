@@ -12,7 +12,8 @@ export default class AppController {
   ): Promise<void> {
     try {
       const ontInfoArr = await this.appService.getAllOntInfo()
-      if (ontInfoArr.length !== 0) {
+
+      if (ontInfoArr.length === 0) {
         const response = await this.appService.populateDatabase()
         res.status(200).json(response)
       } else {
