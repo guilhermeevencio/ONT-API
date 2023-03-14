@@ -18,10 +18,17 @@ export async function ontInfoRequest() {
 }
 
 export async function findOneOntInfo(sn: string) {
-  try {
-    console.log(sn);
-    
+  try {    
     const response = await instance.post('/find', {sn})
+    return response.data
+  } catch (error) {
+    return error
+  }
+}
+
+export async function createOntInfo(ontInfo: IOntInfo) {
+  try {
+    const response = await instance.post('/create-ont', ontInfo)
     return response.data
   } catch (error) {
     return error
