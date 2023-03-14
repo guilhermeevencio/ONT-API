@@ -17,7 +17,7 @@ Outras ferramntas que foram utilizadas foram o `Vite`, `React Router DOM`, `Axio
  > No caso de repositório baixado em formato zip, extraia e pule para o passo 2
  
 2 - No terminal, acesse o diretório /app:
- - ```cd personal-bank-app/app``` ou ```cd personal-bank-app-main/app```
+ - ```cd ONT-API```
  > Atentar para o nome da pasta após ser extraída.
  
 3 - Rode o comando abaixo para subir os containers do Docker:
