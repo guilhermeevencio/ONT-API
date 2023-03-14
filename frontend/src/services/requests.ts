@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IOntInfo } from '../interfaces/Ont';
 
 const baseURL = 'http://localhost:3001'
 
@@ -18,10 +19,12 @@ export async function ontInfoRequest() {
 
 export async function findOneOntInfo(sn: string) {
   try {
+    console.log(sn);
+    
     const response = await instance.post('/find', {sn})
-    return response
+    return response.data
   } catch (error) {
-    console.log(error)
+    return error
   }
 }
 
