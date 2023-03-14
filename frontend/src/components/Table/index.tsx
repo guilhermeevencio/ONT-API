@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import AppContext, { IAppContext } from '../../context/AppContext'
 import { IOntInfo } from '../../interfaces/Ont'
 import { ontInfoRequest } from '../../services/requests'
 
@@ -7,14 +8,25 @@ const bodyBorderStyle = 'border border-slate-700 p-2 text-center	bg-slate-800'
 
 export function Table() {
   const [ontInfo, setOntInfo] = useState<IOntInfo[]>([])
+  const [searchedOnt, setSearchedOnt] = useState<IOntInfo | null>()
+
+  const {searchedOntInfo} = useContext(AppContext) as IAppContext
 
   useEffect(() => {
     const getOntInfoResponse = async () => {
       const response = await ontInfoRequest()
       if (response) setOntInfo(response.data)
-    } 
+    }
     getOntInfoResponse()
   }, [])
+  useEffect(() => {
+    if(searchedOntInfo) {
+      setSearchedOnt(searchedOntInfo)
+    } else {setSearchedOnt(null)}
+    
+  }, [searchedOntInfo])
+  
+
   return (
     <table className='table-auto border-collapse w-4/6 border-spacing-1'>
       <thead className='rounded-md'>
@@ -28,9 +40,9 @@ export function Table() {
         </tr>
       </thead>
       <tbody>
-        {ontInfo.length > 0 ? ontInfo.map((ont) => {
+        {ontInfo.length > 0 && !searchedOnt ? ontInfo.map((ont) => {
           return (
-            <tr>
+            <tr key={ont.sn}>
               <td className={bodyBorderStyle}>{ont.sn}</td>
               <td className={bodyBorderStyle}>{ont.slot}</td>
               <td className={bodyBorderStyle}>{ont.port}</td>
@@ -39,7 +51,14 @@ export function Table() {
               <td className={bodyBorderStyle}>{ont.state}</td>
             </tr>
           )
-        }) : null}
+        }) : (<tr>
+          <td className={bodyBorderStyle}>{searchedOnt?.sn}</td>
+          <td className={bodyBorderStyle}>{searchedOnt?.slot}</td>
+          <td className={bodyBorderStyle}>{searchedOnt?.port}</td>
+          <td className={bodyBorderStyle}>{searchedOnt?.ontId}</td>
+          <td className={bodyBorderStyle}>{searchedOnt?.manufacturer}</td>
+          <td className={bodyBorderStyle}>{searchedOnt?.state}</td>
+        </tr>)}
       </tbody>
     </table>
   )
